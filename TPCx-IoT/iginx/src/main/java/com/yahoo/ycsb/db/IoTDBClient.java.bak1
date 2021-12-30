@@ -1,0 +1,249 @@
+package com.yahoo.ycsb.db;
+
+import static cn.edu.tsinghua.iginx.thrift.DataType.BINARY;
+
+import cn.edu.tsinghua.iginx.exceptions.ExecutionException;
+import cn.edu.tsinghua.iginx.exceptions.SessionException;
+import cn.edu.tsinghua.iginx.session.Session;
+import cn.edu.tsinghua.iginx.session.SessionQueryDataSet;
+import cn.edu.tsinghua.iginx.thrift.DataType;
+import com.yahoo.ycsb.ByteArrayByteIterator;
+import com.yahoo.ycsb.ByteIterator;
+import com.yahoo.ycsb.DB;
+import com.yahoo.ycsb.DBException;
+import com.yahoo.ycsb.Status;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.Vector;
+import java.util.stream.Collectors;
+import org.apache.thrift.transport.TTransportException;
+
+public class IoTDBClient extends DB {
+
+  private Session session = null;
+
+  private static final Object CONNECTION_LOCK = new Object();
+
+  private static Map<Long, Map<String, byte[]>> cacheData;
+  private static int cacheNum = 0;
+  private static String measurement;
+
+  private String db_host = "localhost";
+  private int db_port = 6667;
+  private int cache_threshold = 5000;
+  private boolean debug = true;
+
+
+  public void init() throws DBException {
+    if ((getProperties().getProperty("debug") != null)
+        && (getProperties().getProperty("debug").compareTo("true") == 0)) {
+      debug = true;
+    }
+    if (getProperties().containsKey("iotdbinfo")) {
+      String[] serverInfo = getProperties().getProperty("iotdbinfo").split(":");
+      if (serverInfo.length != 3) {
+        System.err.println("Parse IoTDB Server info failed,it should be ip:port:threshold");
+      } else {
+        this.db_host = serverInfo[0];
+        this.db_port = Integer.parseInt(serverInfo[1]);
+        this.cache_threshold = Integer.parseInt(serverInfo[2]);
+        if (debug) {
+          System.out
+              .printf("Parse IoTDB Server info succeed: %s:%d:%d%n", db_host, db_port,cache_threshold);
+        }
+      }
+    }
+    try {
+      session = new Session(db_host, db_port);
+      session.openSession();
+      if (debug) {
+        System.out.printf("start session(%s:%s) succeed%n", db_host, db_port);
+      }
+      synchronized (CONNECTION_LOCK) {
+        if (cacheData == null) {
+          cacheData = new HashMap<>();
+        }
+      }
+    } catch (SessionException e) {
+      System.err.printf("start session(%s:%s) failed:%s%n", db_host, db_port, e.toString());
+      e.printStackTrace();
+      throw new DBException(e);
+    }
+  }
+
+  public void cleanup() throws DBException {
+    synchronized (CONNECTION_LOCK) {
+      try {
+        if (cacheNum > 0) {
+          insertRecords(cacheData);
+          cacheData.clear();
+        }
+        session.closeSession();
+        session = null;
+        if (debug) {
+          System.out.printf("cleanup session(%s:%s) succeed%n", db_host, db_port);
+        }
+      } catch (SessionException | ExecutionException e) {
+        System.err.printf("cleanup session(%s:%s) failed:%s%n", db_host, db_port, e.toString());
+        e.printStackTrace();
+        throw new DBException(e);
+      }
+    }
+  }
+
+  // TPCx-IoT will not use this method
+  public Status read(String table, String key, Set<String> fields,
+                     HashMap<String, ByteIterator> result) {
+    return Status.OK;
+  }
+
+  // TPCx-IoT will not use this method
+  public Status scan(String table, String startkey, int recordcount, Set<String> fields,
+                     Vector<HashMap<String, ByteIterator>> result) {
+    return Status.OK;
+  }
+
+  public Status scan(String table, String filter, String clientFilter, String timestamp,
+                     Set<String> fields, long runStartTime, Vector<HashMap<String, ByteIterator>> result1,
+                     Vector<HashMap<String, ByteIterator>> result2) {
+    String deviceID = String.format("iginx.%s.%s", clientFilter, filter);
+    long newTimeStamp = Long.parseLong(timestamp);
+    long oldTimeStamp;
+    Status s1 = scanHelper(deviceID, newTimeStamp, fields, result1);
+    if (runStartTime > 0L) {
+      long time = newTimeStamp - runStartTime;
+      oldTimeStamp = newTimeStamp - time;
+    } else {
+      oldTimeStamp = newTimeStamp - 1800000L;
+    }
+    long timestampVal =
+        oldTimeStamp + (long) (Math.random() * (newTimeStamp - 10000L - oldTimeStamp));
+    Status s2 = scanHelper(deviceID, timestampVal, fields, result2);
+    if (s1.isOk() && s2.isOk()) {
+      return Status.OK;
+    }
+    return Status.ERROR;
+  }
+
+  private Status scanHelper(String deviceID, long timestamp, Set<String> fields,
+                            Vector<HashMap<String, ByteIterator>> result) {
+    long startTime = timestamp;
+    long endTime = timestamp + 5000L;
+
+    /*if(deviceID!=null)
+      return Status.OK;*/
+
+    List<String> paths = Collections.singletonList(deviceID + ".*");
+    try {
+      synchronized (CONNECTION_LOCK) {
+        SessionQueryDataSet dataSet = session.queryData(paths, startTime, endTime);
+        for (int i = 0; i < dataSet.getTimestamps().length; i++) {
+          HashMap<String, ByteIterator> rowResult = new HashMap<>();
+          for (int j = 0; j < dataSet.getPaths().size(); j++) {
+            if (dataSet.getValues().get(i).get(j) != null) {
+              // add the function in IginX ?
+              ByteArrayOutputStream baos = new ByteArrayOutputStream();
+              ObjectOutputStream oos = new ObjectOutputStream(baos);
+              oos.writeObject(dataSet.getValues().get(i).get(j));
+              rowResult.put(dataSet.getPaths().get(j), new ByteArrayByteIterator(baos.toByteArray()));
+            }
+          }
+          result.add(rowResult);
+        }
+        if (debug) {
+          System.out.printf("scan %d results from server succeed for deviceID %s from %s to %s%n",
+              result.size(),
+              deviceID, transferLongToDate(startTime), transferLongToDate(endTime));
+        }
+      }
+    } catch (SessionException | IOException e) {
+      e.printStackTrace();
+      return Status.ERROR;
+    }
+    return Status.OK;
+  }
+
+  private String transferLongToDate(Long millSec) {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    Date date = new Date(millSec);
+    return sdf.format(date);
+  }
+
+  // TPCx-IoT will not use this method
+  public Status update(String table, String key, HashMap<String, ByteIterator> values) {
+    return Status.OK;
+  }
+
+  // only support one sensor now
+  public Status insert(String table, String key, HashMap<String, ByteIterator> values) {
+    String[] params = key.split(":");
+    String deviceID = String.format("iginx.%s.%s", params[0], params[1]);
+    long timestamp = Long.parseLong(params[2]);
+
+    try {
+      Map<Long, Map<String, byte[]>> previousCachedData = null;
+      synchronized (CONNECTION_LOCK) {
+        if (measurement == null) {
+          measurement = values.keySet().iterator().next();
+        }
+        cacheData.computeIfAbsent(timestamp, k -> new HashMap<>()).put(deviceID, values.values().iterator().next().toArray());
+        cacheNum++;
+        if (cacheNum >= cache_threshold) {
+          previousCachedData = cacheData;
+          cacheNum = 0;
+          cacheData = new HashMap<>();
+        }
+      }
+      if (previousCachedData != null) {
+        insertRecords(previousCachedData);
+      }
+    } catch (SessionException | ExecutionException e) {
+      e.printStackTrace();
+      System.err.printf("write %d records to server failed because %s%n", cache_threshold, e.toString());
+      return Status.ERROR;
+    }
+    return Status.OK;
+  }
+
+  private void insertRecords(Map<Long, Map<String, byte[]>> cacheData) throws SessionException, ExecutionException {
+    List<String> prefixList = cacheData.values().stream().map(Map::keySet).flatMap(Collection::stream).distinct().collect(Collectors.toList());
+    List<String> paths = new ArrayList<>();
+    List<DataType> dataTypeList = new ArrayList<>();
+    for (String prefix : prefixList) {
+      paths.add(prefix + "." + measurement);
+      dataTypeList.add(BINARY);
+    }
+    long[] timestamps = new long[cacheData.size()];
+    Object[] valuesList = new Object[cacheData.size()];
+    int index = 0;
+    for (Entry<Long, Map<String, byte[]>> entry: cacheData.entrySet()) {
+      timestamps[index] = entry.getKey();
+      Map<String, byte[]> fieldMap = entry.getValue();
+      Object[] values = new Object[paths.size()];
+      for (int i = 0; i < prefixList.size(); i++) {
+        String prefix = prefixList.get(i);
+        values[i] = fieldMap.get(prefix);
+      }
+      valuesList[index] = values;
+      index++;
+    }
+    session.insertRowRecords(paths, timestamps, valuesList, dataTypeList, null);
+  }
+
+
+  // TPCx-IoT will not use this method
+  public Status delete(String table, String key) {
+    return Status.OK;
+  }
+}

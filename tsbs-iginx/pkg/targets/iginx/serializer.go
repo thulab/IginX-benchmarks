@@ -86,10 +86,6 @@ func appendField(buf, key []byte, v interface{}) []byte {
 	buf = serialize.FastFormatAppend(v, buf)
 
 	// Influx uses 'i' to indicate integers:
-	switch v.(type) {
-	case int, int64:
-		buf = append(buf, 'i')
-	}
 
 	return buf
 }

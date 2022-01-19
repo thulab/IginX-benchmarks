@@ -53,7 +53,7 @@ func (c BenchmarkRunnerConfig) AddToFlagSet(fs *pflag.FlagSet) {
 	fs.Bool("prewarm-queries", false, "Run each query twice in a row so the warm query is guaranteed to be a cache hit")
 	fs.Bool("print-responses", false, "Pretty print response bodies for correctness checking (default false).")
 	fs.Int("debug", 0, "Whether to print debug messages.")
-	fs.String("file", "", "File name to read queries from")
+	fs.String("file", "/home/humanfy/tmp_query", "File name to read queries from")
 	fs.String("results-file", "", "Write the test results summary json to this file")
 }
 

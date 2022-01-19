@@ -67,7 +67,7 @@ func (w *HTTPClient) Do(q *query.HTTP, opts *HTTPClientDoOptions) (lag float64, 
 	w.uri = append(w.uri, q.Path...)
 
 	// populate a request with data from the Query:
-	req, err := http.NewRequest(string(q.Method), string(w.uri), nil)
+	req, err := http.NewRequest(string(q.Method), string(w.uri), strings.NewReader(string(q.Body)))
 	if err != nil {
 		panic(err)
 	}

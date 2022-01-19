@@ -2,7 +2,6 @@ package iginx
 
 import (
 	"fmt"
-	"net/url"
 	"time"
 
 	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
@@ -21,16 +20,13 @@ func (g *BaseGenerator) GenerateEmptyQuery() query.Query {
 
 // fillInQuery fills the query struct with data.
 func (g *BaseGenerator) fillInQuery(qi query.Query, humanLabel, humanDesc, sql string) {
-	v := url.Values{}
-	v.Set("count", "false")
-	v.Set("query", sql)
 	q := qi.(*query.HTTP)
 	q.HumanLabel = []byte(humanLabel)
 	q.RawQuery = []byte(sql)
 	q.HumanDescription = []byte(humanDesc)
-	q.Method = []byte("GET")
-	q.Path = []byte(fmt.Sprintf("/exec?%s", v.Encode()))
-	q.Body = nil
+	q.Method = []byte("POST")
+	q.Path = []byte(fmt.Sprintf("/api/v1/datapoints/query"))
+	q.Body = []byte(sql)
 }
 
 // NewDevops creates a new devops use case query generator.

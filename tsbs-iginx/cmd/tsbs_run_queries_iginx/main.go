@@ -37,8 +37,7 @@ func init() {
 	config.AddToFlagSet(pflag.CommandLine)
 	var csvDaemonUrls string
 
-	pflag.String("urls", "http://localhost:9000/", "Daemon URLs, comma-separated. Will be used in a round-robin fashion.")
-
+	pflag.String("urls", "http://localhost:6666/", "Daemon URLs, comma-separated. Will be used in a round-robin fashion.")
 	pflag.Parse()
 
 	err := utils.SetupConfigFile()

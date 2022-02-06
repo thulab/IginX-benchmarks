@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1d44cf05-f7d3-43d3-8fbf-fec4ab0cebe9" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../Datasets/utils/.idea/utils.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/thriftCompiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Datasets/utils/db_load.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Datasets/utils/db_load.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Datasets/utils/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Datasets/utils/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Datasets/utils/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Datasets/utils/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/datasets.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/datasets.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/public/js/directives/qetchQueryPaper.js" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>false</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>false</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="ProjectId" id="22v1cvu2xWN0rQ0JamZWjFtINkt" />
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>HTML</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript validity issuesJavaScript</id>
+          </State>
+          <State>
+            <id>XML</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>AngularJS</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="117" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="118" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="122" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="916" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="117" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="118" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="122" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="916" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="getNumberOf&#9;null&#9;null&#10;vdtw&#9;null&#9;null&#10;1nn&#9;null&#9;null&#10;inspectQuer&#9;null&#9;null&#10;tml&#9;FILE&#9;file:///Users/miro/University/NYUAD/Qetch/Project/Server/public/index.html&#10;checkResult&#9;null&#9;null&#10;checkResultsIn&#9;null&#9;null&#10;queriestocheckposition&#9;null&#9;null&#10;queriesToChe&#9;null&#9;null&#10;inspectquer&#9;null&#9;null&#10;css&#9;FILE&#9;file:///Users/miro/University/NYUAD/Qetch/Project/Server/public/css/index.css&#10;CSS&#9;FILE&#9;file:///Users/miro/University/NYUAD/Qetch/Project/Server/public/css/index.css&#10;dataplo&#9;FILE&#9;file:///Users/miro/University/NYUAD/Qetch/Project/Server/public/js/directives/datasetPlot.js&#10;querycanv&#9;null&#9;null&#10;datasetp&#9;FILE&#9;file:///Users/miro/University/NYUAD/Qetch/Project/Server/public/js/directives/datasetPlot.js&#10;app.js&#9;FILE&#9;file:///Users/miro/University/NYUAD/Qetch/Project/Server/public/js/app.js&#10;queryLengthTolerance&#9;null&#9;null&#10;app.j&#9;FILE&#9;file:///Users/miro/University/NYUAD/Qetch/Project/Server/public/js/app.js&#10;inspec&#9;null&#9;null" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="last_opened_file_path" value="$USER_HOME$/IginX" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Start">
+    <configuration default="true" type="ApexTest" factoryName="Apex Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63344/Server/public/index.html">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript 调试.index.html" />
+      <item itemvalue="npm.Start" />
+    </list>
+  </component>
+  <component name="SFStoredExecutionPersistentComponent">
+    <executions>
+      <execution name="Default" sourceToExecute="" />
+    </executions>
+    <lastSelectedExecutionName>Default</lastSelectedExecutionName>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1d44cf05-f7d3-43d3-8fbf-fec4ab0cebe9" name="Default" comment="" />
+      <created>1463897482358</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1463897482358</updated>
+      <workItem from="1463897483708" duration="169326000" />
+      <workItem from="1465812477604" duration="1532000" />
+      <workItem from="1465816928553" duration="13539000" />
+      <workItem from="1465972141335" duration="32000" />
+      <workItem from="1465972194941" duration="62041000" />
+      <workItem from="1466590696084" duration="146000" />
+      <workItem from="1466590968896" duration="30747000" />
+      <workItem from="1467105145624" duration="29967000" />
+      <workItem from="1467892740087" duration="34376000" />
+      <workItem from="1468307083286" duration="25674000" />
+      <workItem from="1469942851981" duration="6091000" />
+      <workItem from="1469950204465" duration="2594000" />
+      <workItem from="1469957196295" duration="161364000" />
+      <workItem from="1471415186720" duration="58657000" />
+      <workItem from="1472104575806" duration="40079000" />
+      <workItem from="1473776990447" duration="633000" />
+      <workItem from="1473782268409" duration="64091000" />
+      <workItem from="1474346367726" duration="584000" />
+      <workItem from="1474369363786" duration="32441000" />
+      <workItem from="1474869118832" duration="1955000" />
+      <workItem from="1478416645343" duration="17101000" />
+      <workItem from="1484201760993" duration="22762000" />
+      <workItem from="1485165204525" duration="13643000" />
+      <workItem from="1485424124960" duration="10183000" />
+      <workItem from="1485676653811" duration="95521000" />
+      <workItem from="1487518746879" duration="481000" />
+      <workItem from="1487519343375" duration="25364000" />
+      <workItem from="1487742205280" duration="16047000" />
+      <workItem from="1488088432169" duration="50224000" />
+      <workItem from="1489670939214" duration="288000" />
+      <workItem from="1489903045077" duration="72000" />
+      <workItem from="1489903231462" duration="2481000" />
+      <workItem from="1490697565707" duration="731000" />
+      <workItem from="1490787277916" duration="779000" />
+      <workItem from="1490801508031" duration="74000" />
+      <workItem from="1490852753560" duration="1352000" />
+      <workItem from="1490873528007" duration="251000" />
+      <workItem from="1490873794737" duration="172000" />
+      <workItem from="1490874031901" duration="55000" />
+      <workItem from="1490874108650" duration="270000" />
+      <workItem from="1490874420095" duration="6121000" />
+      <workItem from="1490959415168" duration="68000" />
+      <workItem from="1490959740832" duration="102000" />
+      <workItem from="1490959878542" duration="299000" />
+      <workItem from="1490960201609" duration="58000" />
+      <workItem from="1490960332859" duration="32000" />
+      <workItem from="1490960390317" duration="19000" />
+      <workItem from="1490960437045" duration="142000" />
+      <workItem from="1490963567363" duration="3210000" />
+      <workItem from="1491026781833" duration="29530000" />
+      <workItem from="1491387441523" duration="620000" />
+      <workItem from="1492670043068" duration="2578000" />
+      <workItem from="1493738549867" duration="165000" />
+      <workItem from="1495697465052" duration="16324000" />
+      <workItem from="1500445107882" duration="3285000" />
+      <workItem from="1500541667412" duration="934000" />
+      <workItem from="1500542654783" duration="22486000" />
+      <workItem from="1502366095176" duration="4830000" />
+      <workItem from="1504678032832" duration="98000" />
+      <workItem from="1505112781679" duration="8410000" />
+      <workItem from="1508751070644" duration="830000" />
+      <workItem from="1512544547713" duration="6178000" />
+      <workItem from="1512970512750" duration="15346000" />
+      <workItem from="1640703331653" duration="448000" />
+      <workItem from="1640703873985" duration="784000" />
+      <workItem from="1640886233292" duration="5438000" />
+      <workItem from="1641144567424" duration="1218000" />
+      <workItem from="1641337388152" duration="10000" />
+      <workItem from="1641341273797" duration="893000" />
+      <workItem from="1641524301789" duration="6000" />
+      <workItem from="1642070741188" duration="1220000" />
+      <workItem from="1642633630957" duration="5000" />
+      <workItem from="1644147036330" duration="795000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="2">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="779" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1640908180764">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="779" y="311" width="424" height="491" key="FileChooserDialogImpl/72.27.1848.1053@72.27.1848.1053" timestamp="1640908180764" />
+    <state width="1794" height="336" key="GridCell.Tab.0.bottom" timestamp="1640910955037">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1640910955037" />
+    <state width="1794" height="336" key="GridCell.Tab.0.center" timestamp="1640910955036">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1640910955036" />
+    <state width="1794" height="336" key="GridCell.Tab.0.left" timestamp="1640910955035">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1640910955035" />
+    <state width="1794" height="336" key="GridCell.Tab.0.right" timestamp="1640910955037">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1640910955037" />
+    <state width="1794" height="336" key="GridCell.Tab.1.bottom" timestamp="1640910917014">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.1.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1640910917014" />
+    <state width="1794" height="336" key="GridCell.Tab.1.center" timestamp="1640910917013">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.1.center/72.27.1848.1053@72.27.1848.1053" timestamp="1640910917013" />
+    <state width="1794" height="336" key="GridCell.Tab.1.left" timestamp="1640910917012">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.1.left/72.27.1848.1053@72.27.1848.1053" timestamp="1640910917012" />
+    <state width="1794" height="336" key="GridCell.Tab.1.right" timestamp="1640910917014">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.1.right/72.27.1848.1053@72.27.1848.1053" timestamp="1640910917014" />
+    <state width="1794" height="336" key="GridCell.Tab.2.bottom" timestamp="1640910913609">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.2.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1640910913609" />
+    <state width="1794" height="336" key="GridCell.Tab.2.center" timestamp="1640910913609">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.2.center/72.27.1848.1053@72.27.1848.1053" timestamp="1640910913609" />
+    <state width="1794" height="336" key="GridCell.Tab.2.left" timestamp="1640910913608">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.2.left/72.27.1848.1053@72.27.1848.1053" timestamp="1640910913608" />
+    <state width="1794" height="336" key="GridCell.Tab.2.right" timestamp="1640910913609">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.2.right/72.27.1848.1053@72.27.1848.1053" timestamp="1640910913609" />
+    <state width="1794" height="336" key="GridCell.Tab.3.bottom" timestamp="1640910913611">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.3.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1640910913611" />
+    <state width="1794" height="336" key="GridCell.Tab.3.center" timestamp="1640910913610">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.3.center/72.27.1848.1053@72.27.1848.1053" timestamp="1640910913610" />
+    <state width="1794" height="336" key="GridCell.Tab.3.left" timestamp="1640910913610">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.3.left/72.27.1848.1053@72.27.1848.1053" timestamp="1640910913610" />
+    <state width="1794" height="336" key="GridCell.Tab.3.right" timestamp="1640910913610">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state width="1794" height="336" key="GridCell.Tab.3.right/72.27.1848.1053@72.27.1848.1053" timestamp="1640910913610" />
+    <state x="718" y="242" width="555" height="622" key="find.popup" timestamp="1640704349141">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="718" y="242" width="555" height="622" key="find.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1640704349141" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/resources/datasets.js</url>
+          <line>107</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

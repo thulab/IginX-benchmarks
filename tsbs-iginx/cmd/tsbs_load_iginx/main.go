@@ -14,6 +14,7 @@ import (
 
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
+	"github.com/thulab/iginx-client-go/client"
 	"github.com/timescale/tsbs/internal/utils"
 	"github.com/timescale/tsbs/load"
 	"github.com/timescale/tsbs/pkg/targets"
@@ -23,8 +24,7 @@ import (
 
 // Program option vars:
 var (
-	iginxRESTEndPoint string
-	iginxILPBindTo    string
+	session *client.Session
 	doAbortOnExist    bool
 )
 
@@ -67,8 +67,11 @@ func init() {
 		panic(fmt.Errorf("unable to decode config: %s", err))
 	}
 
-	iginxRESTEndPoint = viper.GetString("url")
-	iginxILPBindTo = viper.GetString("ilp-bind-to")
+	session = client.NewSession("127.0.0.1", "6888", "root", "root")
+	if err := session.Open(); err != nil {
+		log.Fatal(err)
+	}
+
 	config.HashWorkers = false
 	loader = load.GetBenchmarkRunner(config)
 }

@@ -5,11 +5,9 @@ import (
 )
 
 type dbCreator struct {
-	iginxRESTEndPoint string
 }
 
 func (d *dbCreator) Init() {
-	d.iginxRESTEndPoint = iginxRESTEndPoint
 }
 
 func (d *dbCreator) DBExists(dbName string) bool {

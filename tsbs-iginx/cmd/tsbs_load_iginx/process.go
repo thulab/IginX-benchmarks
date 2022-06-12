@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"net"
-	"net/http"
+	"github.com/thulab/iginx-client-go/rpc"
+	"log"
 	"strconv"
 	"strings"
 
@@ -13,23 +13,12 @@ import (
 // allows for testing
 var printFn = fmt.Printf
 
-type processor struct {
-	ilpConn (*net.TCPConn)
-}
+type processor struct {}
 
 func (p *processor) Init(numWorker int, _, _ bool) {
-	tcpAddr, err := net.ResolveTCPAddr("tcp4", iginxILPBindTo)
-	if err != nil {
-		fatal("Failed to resolve %s: %s\n", iginxILPBindTo, err.Error())
-	}
-	p.ilpConn, err = net.DialTCP("tcp", nil, tcpAddr)
-	if err != nil {
-		fatal("Failed connect to %s: %s\n", iginxILPBindTo, err.Error())
-	}
 }
 
 func (p *processor) Close(_ bool) {
-	defer p.ilpConn.Close()
 }
 
 func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) {
@@ -43,42 +32,44 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 	lines := strings.Split(batch.buf.String(), "\n")
 	lines = lines[0 : len(lines)-1]
 
-	json := "["
+	var path []string
+	var timestamp int64
+	var values [][]interface{}
+	var types []rpc.DataType
+
 	i := 0
 	for i = 0; i < len(lines); i++ {
 		tmp := strings.Split(lines[i], " ")
 		tmp[0] = "type=" + tmp[0]
 		fir := strings.Split(tmp[0], ",")
-		var tags map[string]string
-		tags = make(map[string]string)
-		j := 0
-		for j = 0; j < len(fir); j++ {
+		device := ""
+		for j := 0; j < len(fir); j++ {
 			kv := strings.Split(fir[j], "=")
-			tags[kv[0]] = kv[1]
+			device += kv[1]
+			device += "."
 		}
 		timestamp, _ := strconv.ParseInt(tmp[2], 10, 64)
 		timestamp /= 1000000
+		device = device[0 : len(device)-1]
+
 		sec := strings.Split(tmp[1], ",")
-		for j = 0; j < len(sec); j++ {
+		for j := 0; j < len(sec); j++ {
 			kv := strings.Split(sec[j], "=")
-			json += fmt.Sprintf(`{
-      			"name": "%s",
-      			"timestamp": %d,
-      			"value": %s,
-      			"tags": {`, kv[0], timestamp, kv[1])
-			for key, value := range tags {
-				json += fmt.Sprintf(`"%s" : "%s",`, key, value)
+			path = append(path, device + "." + kv[0])
+			v, err := strconv.ParseFloat(kv[1],32)
+			if err!=nil{
+				log.Fatal(err)
 			}
-			json = json[0 : len(json)-1]
-			json += "}},"
+			values = append(values, []interface{}{v})
+			types = append(types, rpc.DataType_DOUBLE)
 		}
 	}
+	timestamps := []int64{timestamp}
 
-	json = json[0 : len(json)-1]
-	json += "]"
-	//fmt.Println(json)
+	if err := session.InsertColumnRecords(path, timestamps, values, types); err!= nil{
+		log.Fatal(err)
+	}
 
-	execQuery(iginxRESTEndPoint, json)
 	metricCnt := batch.metrics
 	rowCnt := batch.rows
 
@@ -86,18 +77,4 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 	batch.buf.Reset()
 	bufPool.Put(batch.buf)
 	return metricCnt, uint64(rowCnt)
-}
-
-func execQuery(uriRoot string, query string) (QueryResponse, error) {
-	var qr QueryResponse
-	if strings.HasSuffix(uriRoot, "/") {
-		uriRoot = uriRoot[:len(uriRoot)-1]
-	}
-	uriRoot = uriRoot + "/api/v1/datapoints"
-	resp, err := http.Post(uriRoot, "application/x-www-form-urlencoded", strings.NewReader(query))
-	if err != nil {
-		return qr, err
-	}
-	defer resp.Body.Close()
-	return qr, nil
 }

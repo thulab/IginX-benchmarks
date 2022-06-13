@@ -1,7 +1,7 @@
 package iginx
 
 import (
-	"fmt"
+	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/iot"
 	"time"
 
 	"github.com/timescale/tsbs/cmd/tsbs_generate_queries/uses/devops"
@@ -15,18 +15,15 @@ type BaseGenerator struct {
 
 // GenerateEmptyQuery returns an empty query.Iginx.
 func (g *BaseGenerator) GenerateEmptyQuery() query.Query {
-	return query.NewHTTP()
+	return query.NewIginx()
 }
 
 // fillInQuery fills the query struct with data.
 func (g *BaseGenerator) fillInQuery(qi query.Query, humanLabel, humanDesc, sql string) {
-	q := qi.(*query.HTTP)
+	q := qi.(*query.Iginx)
 	q.HumanLabel = []byte(humanLabel)
-	q.RawQuery = []byte(sql)
 	q.HumanDescription = []byte(humanDesc)
-	q.Method = []byte("POST")
-	q.Path = []byte(fmt.Sprintf("/api/v1/datapoints/query"))
-	q.Body = []byte(sql)
+	q.SqlQuery = []byte(sql)
 }
 
 // NewDevops creates a new devops use case query generator.
@@ -43,4 +40,20 @@ func (g *BaseGenerator) NewDevops(start, end time.Time, scale int) (utils.QueryG
 	}
 
 	return devops, nil
+}
+
+// NewIoT creates a new iot use case query generator.
+func (g *BaseGenerator) NewIoT(start, end time.Time, scale int) (utils.QueryGenerator, error) {
+	core, err := iot.NewCore(start, end, scale)
+
+	if err != nil {
+		return nil, err
+	}
+
+	iot := &IoT{
+		BaseGenerator: g,
+		Core:          core,
+	}
+
+	return iot, nil
 }

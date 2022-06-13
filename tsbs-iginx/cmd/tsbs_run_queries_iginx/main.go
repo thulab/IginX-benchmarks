@@ -43,7 +43,7 @@ func init() {
 }
 
 func main() {
-	runner.Run(&query.HTTPPool, newProcessor)
+	runner.Run(&query.IginxPool, newProcessor)
 }
 
 type processor struct {
@@ -60,7 +60,7 @@ func (p *processor) Init(workerNumber int) {
 }
 
 func (p *processor) ProcessQuery(q query.Query, _ bool) ([]*query.Stat, error) {
-	hq := q.(*query.HTTP)
+	hq := q.(*query.Iginx)
 	lag, err := Do(hq, p.session)
 	if err != nil {
 		return nil, err
@@ -85,8 +85,8 @@ type QueryResponse struct {
 
 // Do performs the action specified by the given Query. It uses fasthttp, and
 // tries to minimize heap allocations.
-func Do(q *query.HTTP, session *client.Session) (lag float64, err error) {
-	sql := string(q.Body)
+func Do(q *query.Iginx, session *client.Session) (lag float64, err error) {
+	sql := string(q.SqlQuery)
 	start := time.Now()
 	// execute sql
 	_, err = session.ExecuteSQL(sql)

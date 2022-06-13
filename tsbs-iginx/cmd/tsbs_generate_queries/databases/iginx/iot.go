@@ -49,14 +49,10 @@ func (i *IoT) getTruckWhereString(nTrucks int) string {
 
 // LastLocByTruck finds the truck location for nTrucks.
 func (i *IoT) LastLocByTruck(qi query.Query, nTrucks int) {
-	influxql := fmt.Sprintf(`SELECT "name", "driver", "latitude", "longitude" 
-		FROM "readings" 
-		WHERE %s 
-		ORDER BY "time" 
-		LIMIT 1`,
+	influxql := fmt.Sprintf("SELECT last(longitude) FROM readings.%s.*.*.*.*",
 		i.getTruckWhereString(nTrucks))
 
-	humanLabel := "Influx last location by specific truck"
+	humanLabel := "Iginx last location by specific truck"
 	humanDesc := fmt.Sprintf("%s: random %4d trucks", humanLabel, nTrucks)
 
 	i.fillInQuery(qi, humanLabel, humanDesc, influxql)
@@ -64,16 +60,10 @@ func (i *IoT) LastLocByTruck(qi query.Query, nTrucks int) {
 
 // LastLocPerTruck finds all the truck locations along with truck and driver names.
 func (i *IoT) LastLocPerTruck(qi query.Query) {
-
-	influxql := fmt.Sprintf(`SELECT "latitude", "longitude" 
-		FROM "readings" 
-		WHERE "fleet"='%s' 
-		GROUP BY "name","driver" 
-		ORDER BY "time" 
-		LIMIT 1`,
+	influxql := fmt.Sprintf("SELECT last(longitude) FROM readings.*.%s.*.*.*",
 		i.GetRandomFleet())
 
-	humanLabel := "Influx last location per truck"
+	humanLabel := "Iginx last location per truck"
 	humanDesc := humanLabel
 
 	i.fillInQuery(qi, humanLabel, humanDesc, influxql)

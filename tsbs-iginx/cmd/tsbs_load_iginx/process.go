@@ -13,7 +13,7 @@ import (
 // allows for testing
 var printFn = fmt.Printf
 
-type processor struct {}
+type processor struct{}
 
 func (p *processor) Init(numWorker int, _, _ bool) {
 }
@@ -48,16 +48,17 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 			device += kv[1]
 			device += "."
 		}
-		timestamp, _ := strconv.ParseInt(tmp[2], 10, 64)
+		timestamp, _ = strconv.ParseInt(tmp[2], 10, 64)
 		timestamp /= 1000000
 		device = device[0 : len(device)-1]
+		device = strings.Replace(device, "-", "_", -1)
 
 		sec := strings.Split(tmp[1], ",")
 		for j := 0; j < len(sec); j++ {
 			kv := strings.Split(sec[j], "=")
-			path = append(path, device + "." + kv[0])
-			v, err := strconv.ParseFloat(kv[1],32)
-			if err!=nil{
+			path = append(path, device+"."+kv[0])
+			v, err := strconv.ParseFloat(kv[1], 32)
+			if err != nil {
 				log.Fatal(err)
 			}
 			values = append(values, []interface{}{v})
@@ -66,7 +67,7 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 	}
 	timestamps := []int64{timestamp}
 
-	if err := session.InsertColumnRecords(path, timestamps, values, types); err!= nil{
+	if err := session.InsertColumnRecords(path, timestamps, values, types); err != nil {
 		log.Fatal(err)
 	}
 

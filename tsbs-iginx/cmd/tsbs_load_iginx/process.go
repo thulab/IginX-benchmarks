@@ -60,6 +60,7 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 		timestamp /= 1000000
 		sec := strings.Split(tmp[1], ",")
 		for j = 0; j < len(sec); j++ {
+			// fmt.Sprintf("[DEBUG] name: %s",sec[j])
 			kv := strings.Split(sec[j], "=")
 			json += fmt.Sprintf(`{
       			"name": "%s",
@@ -76,7 +77,7 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 
 	json = json[0 : len(json)-1]
 	json += "]"
-	//fmt.Println(json)
+	fmt.Println(json)
 
 	execQuery(iginxRESTEndPoint, json)
 	metricCnt := batch.metrics

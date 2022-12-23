@@ -14,7 +14,6 @@ import (
 
 	"github.com/blagojts/viper"
 	"github.com/spf13/pflag"
-	"github.com/thulab/iginx-client-go/client"
 	"github.com/timescale/tsbs/internal/utils"
 	"github.com/timescale/tsbs/load"
 	"github.com/timescale/tsbs/pkg/targets"
@@ -24,7 +23,7 @@ import (
 
 // Program option vars:
 var (
-	session *client.Session
+	//session *client.Session
 	doAbortOnExist    bool
 )
 
@@ -47,11 +46,13 @@ func init() {
 	// config.AddToFlagSet(pflag.CommandLine)
 	pflag.CommandLine.Uint("batch-size", 10, "Number of items to batch together in a single insert")
 	pflag.CommandLine.Uint("workers", 1, "Number of parallel clients inserting")
-	pflag.CommandLine.Uint64("limit", 0, "Number of items to insert (0 = all of them).")
+	pflag.CommandLine.Int64("limit", 0, "Number of items to insert (0 = all of them).")
 	pflag.CommandLine.Bool("do-load", true, "Whether to write data. Set this flag to false to check input read speed.")
+	pflag.CommandLine.Bool("no-flow-control", false, "Whether to use flow control. Set this flag to false to load all data first.")
 	pflag.CommandLine.Duration("reporting-period", 10*time.Second, "Period to report write stats")
 	pflag.CommandLine.String("file", "/home/humanfy/tmp_data", "File name to read data from")
 	pflag.CommandLine.Int64("seed", 0, "PRNG seed (default: 0, which uses the current timestamp)")
+	pflag.CommandLine.Uint64("channel-capacity", 100000, "Channel capacity")
 	pflag.CommandLine.String("insert-intervals", "", "Time to wait between each insert, default '' => all workers insert ASAP. '1,2' = worker 1 waits 1s between inserts, worker 2 and others wait 2s")
 	pflag.CommandLine.Bool("hash-workers", false, "Whether to consistently hash insert data to the same workers (i.e., the data for a particular host always goes to the same worker)")
 	target.TargetSpecificFlags("", pflag.CommandLine)
@@ -67,10 +68,10 @@ func init() {
 		panic(fmt.Errorf("unable to decode config: %s", err))
 	}
 
-	session = client.NewSession("127.0.0.1", "6888", "root", "root")
-	if err := session.Open(); err != nil {
-		log.Fatal(err)
-	}
+	//session = client.NewSession("127.0.0.1", "6888", "root", "root")
+	//if err := session.Open(); err != nil {
+	//	log.Fatal(err)
+	//}
 
 	config.HashWorkers = false
 	loader = load.GetBenchmarkRunner(config)

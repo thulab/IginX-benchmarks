@@ -78,6 +78,7 @@ type CommonBenchmarkRunner struct {
 	metricCnt      uint64
 	rowCnt         uint64
 	initialRand    *rand.Rand
+	currPoc        *targets.Processor
 	sleepRegulator insertstrategy.SleepRegulator
 }
 

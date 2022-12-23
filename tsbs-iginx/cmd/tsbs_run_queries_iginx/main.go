@@ -53,7 +53,11 @@ type processor struct {
 func newProcessor() query.Processor { return &processor{} }
 
 func (p *processor) Init(workerNumber int) {
-	p.session = client.NewSession("127.0.0.1", "6888", "root", "root")
+	if workerNumber%2 == 0 {
+		p.session = client.NewSession("172.16.17.11", "6888", "root", "root")
+	} else if workerNumber%2 == 1 {
+		p.session = client.NewSession("172.16.17.13", "6888", "root", "root")
+	}
 	if err := p.session.Open(); err != nil {
 		log.Fatal(err)
 	}

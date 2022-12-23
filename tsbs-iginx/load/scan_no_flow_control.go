@@ -18,6 +18,7 @@ func scanWithoutFlowControl(
 		panic("batch size can't be 0")
 	}
 	numChannels := len(channels)
+	//fmt.Printf("numChannels = %d \n", numChannels)
 	batches := make([]targets.Batch, numChannels)
 	for i := 0; i < numChannels; i++ {
 		batches[i] = factory.New()
@@ -41,6 +42,7 @@ func scanWithoutFlowControl(
 		if batches[idx].Len() >= batchSize {
 			channels[idx] <- batches[idx]
 			batches[idx] = factory.New()
+			//fmt.Printf("itemsRead = %d \n", itemsRead)
 		}
 	}
 

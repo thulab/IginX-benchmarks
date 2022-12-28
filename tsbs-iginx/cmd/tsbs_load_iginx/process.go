@@ -129,24 +129,18 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 	var timestamp int64
 	var values [][]interface{}
 	var types []rpc.DataType
-	var tagsList []map[string]string
 
 	i := 0
 	for i = 0; i < len(lines); i++ {
-		var tag map[string]string
-		tag = make(map[string]string)
 		tmp := strings.Split(lines[i], " ")
 		tmp[0] = "type=" + tmp[0]
 		fir := strings.Split(tmp[0], ",")
 		device := fir[0] + "."
 		for j := 1; j < len(fir); j++ {
 			kv := strings.Split(fir[j], "=")
-			if kv[0] == "name" || kv[0] == "fleet" {
-				device += kv[1]
-				device += "."
-			} else {
-				tag[kv[0]] = strings.Replace(kv[1], ".", "_", -1)
-			}
+			device += strings.Replace(kv[1], ".", "_", -1)
+			device += "."
+			device = strings.Replace(device, "-", "_", -1)
 		}
 
 		timestamp, _ = strconv.ParseInt(tmp[2], 10, 64)
@@ -157,16 +151,20 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 		sec := strings.Split(tmp[1], ",")
 		for j := 0; j < len(sec); j++ {
 			kv := strings.Split(sec[j], "=")
-			path = append(path, device+"."+kv[0])
-			v, err := strconv.ParseFloat(kv[1], 32)
-			if err != nil {
-				log.Fatal(err)
+			onePath := device+"."+kv[0]
+			onePath = strings.Replace(onePath, "-", "_", -1)
+			if !in(onePath, path){
+				path = append(path, onePath)
+				v, err := strconv.ParseFloat(kv[1], 32)
+				if err != nil {
+					log.Fatal(err)
+				}
+				values = append(values, []interface{}{v})
+				types = append(types, rpc.DataType_DOUBLE)
 			}
-			values = append(values, []interface{}{v})
-			types = append(types, rpc.DataType_DOUBLE)
-			tagsList = append(tagsList, tag)
 		}
 	}
+
 	timestamps := []int64{timestamp}
 
 	//c := make(chan int, 1000)
@@ -174,7 +172,7 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 	//sqlChan <- batch.buf.String()
 	//go p.logWithTimeout(c, 10*time.Second, sqlChan)
 
-	err := p.session.InsertColumnRecords(path, timestamps, values, types, tagsList)
+	err := p.session.InsertColumnRecords(path, timestamps, values, types, nil)
 	if err != nil {
 		log.Println(err)
 		panic(err)
@@ -188,4 +186,14 @@ func (p *processor) ProcessBatch(b targets.Batch, doLoad bool) (uint64, uint64) 
 	batch.buf.Reset()
 	bufPool.Put(batch.buf)
 	return metricCnt, uint64(rowCnt)
+}
+
+
+func in(target string, strArray []string) bool {
+	for _, element := range strArray{
+		if target == element{
+			return true
+		}
+	}
+	return false
 }

@@ -53,11 +53,12 @@ type processor struct {
 func newProcessor() query.Processor { return &processor{} }
 
 func (p *processor) Init(workerNumber int) {
-	if workerNumber%2 == 0 {
-		p.session = client.NewSession("172.16.17.11", "6888", "root", "root")
-	} else if workerNumber%2 == 1 {
-		p.session = client.NewSession("172.16.17.13", "6888", "root", "root")
-	}
+	//if workerNumber%2 == 0 {
+	//	p.session = client.NewSession("172.16.17.21", "6888", "root", "root")
+	//} else if workerNumber%2 == 1 {
+	//	p.session = client.NewSession("172.16.17.23", "6888", "root", "root")
+	//}
+	p.session = client.NewSession("172.16.17.21", "6888", "root", "root")
 	if err := p.session.Open(); err != nil {
 		log.Fatal(err)
 	}
@@ -96,6 +97,7 @@ func Do(q *query.Iginx, session *client.Session) (lag float64, err error) {
 	_, err = session.ExecuteSQL(sql)
 
 	if err != nil {
+		fmt.Println(err)
 		panic(err)
 	}
 

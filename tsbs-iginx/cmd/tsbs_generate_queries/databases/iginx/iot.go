@@ -96,7 +96,8 @@ func (i *IoT) TrucksWithHighLoad(qi query.Query) {
 func (i *IoT) StationaryTrucks(qi query.Query) {
 	// not all implemented limited by iginx sql grammar
 	interval := i.Interval.MustRandWindow(iot.StationaryDuration)
-	iginxql := fmt.Sprintf("SELECT AVG(velocity) FROM readings.*.%s.* where time >=%d and time <= %d",
+
+	iginxql := fmt.Sprintf("SELECT AVG(velocity) FROM readings.*.%s where time >=%d and time <= %d",
 		i.GetRandomFleet(), interval.Start().Unix()*1000, interval.End().Unix()*1000)
 
 	humanLabel := "Iginx stationary trucks"
